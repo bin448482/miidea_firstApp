@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+     <div class="container">
+         <h1 class="blog-title">欢迎来到微创意！</h1>
+         <h3 class="blog-post-title">我们提供解决方案为您配置个人云</h3>
+         <p>通过个人云，您能更方便的创建各种免费服务，例如</p>
+         <ul>
+             <li>您可以架设自己的VPN, 为您的游戏加速。</li>
+             <li>您可以架设自己的密码管理服务。</li>
+         </ul>
+         <p>当然云服务器的费用需要根据自己需求去购买！</p>
+         <p>服务是用python开发的，web框架：
+            前端要求响应式页面设计：JS+bootstrap
+            后台用Flask整合页面+restful API. session机制用oauth。
+            ORM用sqlalchemy，数据库mysql或SQLite。
+         <p>源码链接：</p>
+         <p>微创意版本07-15-2017</p>
+         <ul>
+             <li>主页改版。</li>
+             <li>密码管理增加新功能，保存token</li>
+         </ul>
+     </div>
+{% endblock %}

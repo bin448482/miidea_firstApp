@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div>
+            <h2 class="blog-post-title">欢迎使用密码管理</h2>
+            <p class="lead blog-description">这个创意帮您管理日常生活中的密码，希望能喜欢！如果是您第一次使用，请点击<a href="{{ url_for('pwd_tool_help')}}">帮助</a>。</p>
+
+            <from>
+                <dir class="form-group">
+                    <label>手机号码 或 邮箱:</label>
+                    <input class="form-control" id="phone" name="phone" type="text" />
+                </dir>
+                <dir class="form-group">
+                    <label>口令:</label>
+                    <input class="form-control" id="token" name="token" type="password" />
+                </dir>
+                <dir class="form-group">
+                    <input class="btn btn-default" id="btn_getCode" name="btn_getCode" type="button" value="获取数字密码" />
+                    <input class="btn btn-default" id="btn_resetCode" name="btn_resetCode" type="button" value="重置数字密码" />
+                </dir>
+                <label id="result"></label>
+            </from>
+            <p>将来我们还会拥有更多的馊主意，希望您多多支持，敬请期待！</p>
+        </div>
+    </div><!-- /.container -->
+{% endblock %}
+{% block pageScirpts %}
+<script>
+    $(function () {
+        $("#btn_getCode").click(function() {
+            var phone = $("#phone").val();
+            var token = $("#token").val();
+            $("#result").html("");
+
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/json;charset=UTF-8',
+              url: "{{ url_for('pwd_tool')}}",
+              data: JSON.stringify({"phone":phone, "token": token}),
+              dataType: "html"
+              })
+              .done(
+                function(msg){$("#result").append(msg);}
+              );
+        });
+        $("#btn_resetCode").click(function() {
+            var phone = $("#phone").val();
+            var token = $("#token").val();
+            $("#result").html("");
+
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/json;charset=UTF-8',
+              url: "{{ url_for('pwd_tool')}}",
+              data: JSON.stringify({"phone":phone, "token": token, "action":"reset"}),
+              dataType: "html"
+              })
+              .done(
+                function(msg){$("#result").append(msg);}
+              );
+        });
+    })
+</script>
+{% endblock %}
